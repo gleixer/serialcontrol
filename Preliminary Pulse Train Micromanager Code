@@ -1,0 +1,55 @@
+public class WHDTS_Stimulation{
+
+    public static void main(String []args){
+        /*Scanner scan = new Scanner(System.in);
+        System.out.print("Please input the desired Frequency: ");
+        int freqInt = scan.nextInt();
+        System.out.print("Please input the desired Duty Cycle percent as two integers: ");
+        int DCInt = scan.nextInt();
+        System.out.print("Please input the experiment length(ms): ");
+        long int expLength = scan.nextInt();
+        System.out.print("Please input the pulse train length(ms): ");
+        long int pulseTrain = scan.nextInt();
+        scan.close();
+        String Freq = "F"+Integer.toString(freqInt);
+        String DC = "D0"+Integer.toString(freqDC); //assuming 100% duty cycle isnt used
+         */
+        String Freq = "F100";
+        String DC = "D050";
+        boolean stimulation = false;
+        long int expStart = System.currentTimeMillis();
+        long int lastPulse = expStart;
+
+        while(expStart<=expStart+expLength){
+            expStart = System.currentTimeMillis();
+            if(lastPulse>=lastPulse+pulseTrain){
+                if(stimulation){
+                    setFreqDC(Freq,DC);
+                }
+                else{
+                    SetStimOff();
+                }
+                lastPulse = expStart;
+                stimulation = !stimulation;
+            }
+        }
+
+
+    }
+    static void SetFreqDC(String Freq, String DC) {
+        port = "COM3";
+        commandTerminator = "\r";
+        answerTermiantor = "\n";
+        mmc.setSerialPortCommand(port, Freq, commandTerminator);
+        AnswerFreq = mmc.getSerialPortAnswer(port, answerTerminator);
+        mmc.setSerialPortCommand(port, DC, commandTerminator);
+        AnswerDC = mmc.getSerialPortAnswer(port, answerTerminator);
+    }
+    static void SetStimOff() {
+        port = "COM3";
+        commandTerminator = "\r";
+        answerTermiantor = "\n";
+        mmc.setSerialPortCommand(port, "OFF", commandTerminator);
+        Answer= mmc.getSerialPortAnswer(port, answerTerminator);
+    }
+}
